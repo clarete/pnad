@@ -3,7 +3,6 @@
 import io
 import sys
 import pandas
-import numpy
 
 CONVERT_TABLE = {c: lambda value: int(value or 0) for c in [
     'V4746',
@@ -40,27 +39,33 @@ REGIOES_TABLE = {
     # 51	Mato Grosso
     # 52	Goiás
     # 53	Distrito Federal
-    'norte': [11, 12, 13, 14, 15, 16, 17],
-    'norteste': [21, 22, 23, 24, 25, 26, 27, 28, 29],
-    'sul': [41,42, 43],
+    'norte':        [11, 12, 13, 14, 15, 16, 17],
+    'nordeste':     [21, 22, 23, 24, 25, 26, 27, 28, 29],
+    'sul':          [41,42, 43],
     'centro-oeste': [50, 51, 52, 53],
-    'norte': [11, 12, 13, 14, 15, 16, 17, 21, 22],
+    'sp':           [35],
+    'rj':           [33],
+    'mg':           [31],
+    'es':           [32],
+    'brasil':       [88],
+    'estrangeiro':  [98],
 }
 
+
 IDADES_TABLE = {
-    'ate_18':      [('lt',  18)],
-    'de_19_a_30':  [('gte', 18), ('lt', 30)],
-    'de_31_a_45':  [('gte', 30), ('lt', 45)],
-    'de_46_a_50':  [('gte', 45), ('lt', 50)],
-    'mais_de_50':  [('gte', 50)],
+    'ate 19':       [('lt', 20)],
+    '20 a 39 anos': [('gte', 20), ('lt', 39)],
+    'mais de 40':   [('gte', 40)],
 }
 
 CLASSES_TABLE = {
-    'e': [('lt',  1085)],
-    'd': [('gte', 1085), ('lt', 1734)],
-    'c': [('gte', 1734), ('lt', 7475)],
-    'b': [('gte', 7475), ('lt', 9745)],
-    'a': [('gte', 9745)],
+    'Ate 1SM':       [('lt', 789)],
+    'De 1 a 2 SM':   [('gte', 789), ('lt', 1576)],
+    'De 2 a 3SM':    [('gte', 1577), ('lt', 2364)],
+    'De 3 a 5SM':    [('gte', 2365), ('lt', 3940)],
+    'De 5 a 10SM':   [('gte', 3941), ('lt', 7880)],
+    'De 10 a 20SM':  [('gte', 7881), ('lt', 15760)],
+    'Acima de 20SM': [('gte', 15760)],
 }
 
 

@@ -5,8 +5,6 @@ import sys
 import pandas
 import numpy
 
-## TOTAL_LINES = 362556
-
 CONVERT_TABLE = {c: lambda value: int(value or 0) for c in [
     'V4746',
     'V4747',
@@ -107,18 +105,21 @@ def read_file(path):
         path, sep=',', header=0, low_memory=False,
         converters=CONVERT_TABLE)
 
-    # Separa por região
+    ## Build a CSV manually. Let's start from the header
+    print(','.join(['regiao', 'faixa etaria', 'renda', 'n', 'peso', 'n * peso']))
+
+    ## The CSV body will be built here
     for regiao in REGIOES_TABLE:
-        print 'regiao:', regiao
         view = pnad[filtrar_regiao(pnad, regiao)]
         for idade in IDADES_TABLE:
-            print '  idade:', idade
             idade_view = view[filtrar_idade(view, idade)]
             for classe in CLASSES_TABLE:
-                print '    classe:', classe,
                 classe_view = idade_view[filtrar_classe(idade_view, classe)]
-                print len(classe_view)
+                weight = classe_view.mean()['V4729']
+                count = len(classe_view)
 
+                line = [regiao, idade, classe, count, weight, count * weight]
+                print(','.join(str(l) for l in line))
 
 if __name__ == '__main__':
     try:

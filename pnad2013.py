@@ -47,8 +47,6 @@ REGIOES_TABLE = {
     'rj':           [33],
     'mg':           [31],
     'es':           [32],
-    'brasil':       [88],
-    'estrangeiro':  [98],
 }
 
 

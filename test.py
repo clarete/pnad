@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+import io
 import convert
 import sure
 
@@ -57,4 +58,29 @@ def test_get_vars():
          'name': 'V0103',
          'comment': 'Número de série',
         },
+    ])
+
+
+def test_read_row():
+    "read_row() "
+
+    # Given the folowing variables
+    variables = convert.get_vars("""\
+@00001          V0101          $4.          /*Ano de referência*/
+@00005          UF          $2.          /*Unidade da Federação*/
+@00005          V0102          $8.          /*Número de controle*/
+@00013          V0103          $3.          /*Número de série*/
+@00016          V0301          $2.          /*Número de ordem*/
+@00018          V0302          $1.          /*Sexo*/
+@00019          V3031          $2.          /*Dia de nascimento*/
+""".splitlines())
+
+    line = """\
+20141100001500101219081987027111414  2  170432  4           23     414       2041 18133     14                                                           1   1782560031                                                                                                                                           12 2       81234343           1000000001500              111132144120201                                     3 213                                                                                                 3434 43  434                                                                                                                4                                     09110132070812110107080000000015000000000015000000000015000000000015000000000015000203210025200252 4003000000000500033122100000000050020160623
+"""
+
+    values = convert.read_row(line, variables)
+
+    values.should.equal([
+        '2014', '11', '11000015', '001', '01', '2', '19',
     ])

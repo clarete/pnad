@@ -33,15 +33,15 @@ def get_vars(varsfile):
     return variables
 
 
-def read_var(fp, var):
-    fp.seek(var['position'] - 1) # 1 index based
-    return fp.read(var['size'])
+def read_var(line, var):
+    pos = var['position'] - 1   # 1 index based
+    return line[pos : pos + var['size']]
 
 
-def read_row(fp, variables):
+def read_row(line, variables):
     columns = []
     for var in variables:
-        value = read_var(fp, var)
+        value = read_var(line, var)
         columns.append(value.strip())
     return columns
 
@@ -57,8 +57,8 @@ def main(vars_file, data_file):
     separator = ','
 
     print_header(variables, separator)
-    while True:
-        line = read_row(data_fp, variables)
+    for line in data_fp:
+        line = read_row(line, variables)
         print(separator.join(line))
 
     data_fp.close()

@@ -41,7 +41,7 @@ complexo e está disponível nesse mesmo repositório, chamado
 Para converter o arquivo de dados, execute:
 
 ```bash
-$ python convert.py input.txt <pacote-do-IBGE>/Dados/PES2013.txt > PES2013.csv
+$ python convert.py input.2013.txt <pacote-do-IBGE>/Dados/PES2013.txt > PES2013.csv
 ```
 
 Output
@@ -51,5 +51,5 @@ Para obter um CSV com os campos Região, Faixa etária, Renda, N, Peso e
 N * P, execute no terminal:
 
 ```bash
-$ python pnad2013.py PES2013.csv > output.csv
+$ python pnad.py PES2013.csv > output.csv
 ```

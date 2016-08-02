@@ -3,6 +3,7 @@
 
 import io
 import os
+import sys
 
 def get_vars(filepath):
     variables = []
@@ -21,7 +22,7 @@ def get_vars(filepath):
         variable = variable.strip()
         size = int(float(size.replace('$', '')))
 
-        variables.append({'name': comment, 'position': position, 'size': size})
+        variables.append({'name': variable, 'position': position, 'size': size})
         total_size += size
 
     varsfile.close()
@@ -57,4 +58,4 @@ def main(vars_file, data_file):
     data_fp.close()
 
 if __name__ == '__main__':
-    main(sys.argv[1:3])
+    main(*sys.argv[1:3])

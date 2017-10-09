@@ -53,3 +53,8 @@ N * P, execute no terminal:
 ```bash
 $ python pnad.py PES2013.csv > output.csv
 ```
+
+Licensa
+-------
+
+Este software está licensiado sob GPLv3.
